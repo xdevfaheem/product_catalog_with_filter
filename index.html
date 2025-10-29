@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog with Filters - MVP</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1><i class="fas fa-shopping-bag"></i> Product Catalog</h1>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search products..." />
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Filters Sidebar -->
+            <aside class="filters-sidebar">
+                <h3><i class="fas fa-filter"></i> Filters</h3>
+
+                <!-- Category Filter -->
+                <div class="filter-group">
+                    <h4>Category</h4>
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+
+                <!-- Subcategory Filter -->
+                <div class="filter-group">
+                    <h4>Subcategory</h4>
+                    <select id="subcategoryFilter">
+                        <option value="">All Subcategories</option>
+                    </select>
+                </div>
+
+                <!-- Brand Filter -->
+                <div class="filter-group">
+                    <h4>Brand</h4>
+                    <select id="brandFilter">
+                        <option value="">All Brands</option>
+                    </select>
+                </div>
+
+                <!-- Price Range Filter -->
+                <div class="filter-group">
+                    <h4>Price Range</h4>
+                    <div class="price-inputs">
+                        <input type="number" id="minPrice" placeholder="Min Price" />
+                        <input type="number" id="maxPrice" placeholder="Max Price" />
+                    </div>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-group">
+                    <h4>Minimum Rating</h4>
+                    <select id="ratingFilter">
+                        <option value="">Any Rating</option>
+                        <option value="4">4+ Stars</option>
+                        <option value="3">3+ Stars</option>
+                        <option value="2">2+ Stars</option>
+                        <option value="1">1+ Stars</option>
+                    </select>
+                </div>
+
+                <!-- Stock Filter -->
+                <div class="filter-group">
+                    <h4>Availability</h4>
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="inStockOnly" />
+                        In Stock Only
+                    </label>
+                </div>
+
+                <!-- Clear Filters -->
+                <button id="clearFilters" class="clear-btn">
+                    <i class="fas fa-times"></i> Clear All Filters
+                </button>
+            </aside>
+
+            <!-- Product Grid -->
+            <section class="product-section">
+                <div class="section-header">
+                    <h2>Products</h2>
+                    <div class="sort-section">
+                        <label for="sortBy">Sort by:</label>
+                        <select id="sortBy">
+                            <option value="name">Name</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="productsCount" class="products-count">
+                    Loading products...
+                </div>
+
+                <div id="productsGrid" class="products-grid">
+                    <!-- Products will be loaded here by JavaScript -->
+                </div>
+
+                <!-- No products message -->
+                <div id="noProducts" class="no-products" style="display: none;">
+                    <i class="fas fa-box-open"></i>
+                    <p>No products found matching your criteria.</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loading spinner -->
+        <div id="loadingSpinner" class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Loading products...</p>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

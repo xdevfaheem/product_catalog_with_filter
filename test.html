@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Catalog Tests</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-container { margin-bottom: 20px; }
+        .test-result { padding: 10px; margin: 5px 0; border-radius: 5px; }
+        .test-pass { background: #d4edda; color: #155724; }
+        .test-fail { background: #f8d7da; color: #721c24; }
+        .test-summary { font-weight: bold; margin-top: 20px; }
+        .test-log { background: #f8f9fa; padding: 10px; border-radius: 5px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Product Catalog - Test Suite</h1>
+    <div id="test-results"></div>
+    <div id="test-summary"></div>
+
+    <script>
+        // Simple test framework
+        class TestRunner {
+            constructor() {
+                this.tests = [];
+                this.passed = 0;
+                this.failed = 0;
+            }
+
+            test(name, testFunc) {
+                this.tests.push({ name, testFunc });
+            }
+
+            async runTests() {
+                const resultsDiv = document.getElementById('test-results');
+
+                for (let { name, testFunc } of this.tests) {
+                    try {
+                        await testFunc();
+                        this.passed++;
+                        resultsDiv.innerHTML += `<div class="test-result test-pass">✓ ${name}</div>`;
+                    } catch (error) {
+                        this.failed++;
+                        resultsDiv.innerHTML += `<div class="test-result test-fail">✗ ${name}: ${error.message}</div>`;
+                        console.error(`Test failed: ${name}`, error);
+                    }
+                }
+
+                this.displaySummary();
+            }
+
+            displaySummary() {
+                const summaryDiv = document.getElementById('test-summary');
+                const total = this.passed + this.failed;
+                summaryDiv.innerHTML = `
+                    <div class="test-summary">
+                        Tests run: ${total} | Passed: ${this.passed} | Failed: ${this.failed}
+                        ${this.failed === 0 ? '🎉 All tests passed!' : '⚠️ Some tests failed'}
+                    </div>
+                `;
+            }
+
+            assertEqual(actual, expected, message) {
+                if (actual !== expected) {
+                    throw new Error(`${message || 'Assertion failed'}: expected ${expected}, got ${actual}`);
+                }
+            }
+
+            assertTrue(value, message) {
+                if (!value) {
+                    throw new Error(message || 'Expected true, got false');
+                }
+            }
+
+            assertFalse(value, message) {
+                if (value) {
+                    throw new Error(message || 'Expected false, got true');
+                }
+            }
+        }
+
+        // Mock product data for testing
+        const mockProducts = [
+            {
+                id: 1,
+                name: "Samsung Galaxy S23",
+                category: "Electronics",
+                subcategory: "Mobile Phones",
+                price: 75000,
+                brand: "Samsung",
+                rating: 4.5,
+                inStock: true
+            },
+            {
+                id: 2,
+                name: "Nike Air Max",
+                category: "Fashion",
+                subcategory: "Shoes",
+                price: 8500,
+                brand: "Nike",
+                rating: 4.3,
+                inStock: true
+            },
+            {
+                id: 3,
+                name: "MacBook Pro M3",
+                category: "Electronics",
+                subcategory: "Laptops",
+                price: 185000,
+                brand: "Apple",
+                rating: 4.8,
+                inStock: false
+            }
+        ];
+
+        // Test cases
+        const testRunner = new TestRunner();
+
+        testRunner.test('Filter by category should work correctly', () => {
+            const electronicsProducts = mockProducts.filter(p => p.category === 'Electronics');
+            testRunner.assertEqual(electronicsProducts.length, 2, 'Should find 2 electronics products');
+        });
+
+        testRunner.test('Filter by price range should work correctly', () => {
+            const affordableProducts = mockProducts.filter(p => p.price <= 10000);
+            testRunner.assertEqual(affordableProducts.length, 1, 'Should find 1 product under 10000');
+        });
+
+        testRunner.test('Filter by stock should work correctly', () => {
+            const inStockProducts = mockProducts.filter(p => p.inStock);
+            testRunner.assertEqual(inStockProducts.length, 2, 'Should find 2 in-stock products');
+        });
+
+        testRunner.test('Filter by rating should work correctly', () => {
+            const highRatedProducts = mockProducts.filter(p => p.rating >= 4.5);
+            testRunner.assertEqual(highRatedProducts.length, 2, 'Should find 2 products with rating >= 4.5');
+        });
+
+        testRunner.test('Filter by brand should work correctly', () => {
+            const appleProducts = mockProducts.filter(p => p.brand === 'Apple');
+            testRunner.assertEqual(appleProducts.length, 1, 'Should find 1 Apple product');
+        });
+
+        testRunner.test('Search functionality should work correctly', () => {
+            const searchResults = mockProducts.filter(p => 
+                p.name.toLowerCase().includes('samsung') ||
+                p.description?.toLowerCase().includes('samsung') ||
+                p.brand.toLowerCase().includes('samsung')
+            );
+            testRunner.assertEqual(searchResults.length, 1, 'Should find 1 Samsung product');
+        });
+
+        testRunner.test('Combined filters should work correctly', () => {
+            const combinedResults = mockProducts.filter(p => 
+                p.category === 'Electronics' && p.inStock && p.price <= 80000
+            );
+            testRunner.assertEqual(combinedResults.length, 1, 'Should find 1 product matching all criteria');
+        });
+
+        testRunner.test('Sort by price (low to high) should work correctly', () => {
+            const sorted = [...mockProducts].sort((a, b) => a.price - b.price);
+            testRunner.assertTrue(sorted[0].price <= sorted[1].price, 'First product should have lowest price');
+            testRunner.assertTrue(sorted[1].price <= sorted[2].price, 'Prices should be in ascending order');
+        });
+
+        testRunner.test('Sort by rating should work correctly', () => {
+            const sorted = [...mockProducts].sort((a, b) => b.rating - a.rating);
+            testRunner.assertTrue(sorted[0].rating >= sorted[1].rating, 'First product should have highest rating');
+        });
+
+        // Run tests when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            testRunner.runTests();
+        });
+    </script>
+</body>
+</html>

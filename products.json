@@ -1,0 +1,148 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Samsung Galaxy S23",
+      "category": "Electronics",
+      "subcategory": "Mobile Phones",
+      "price": 75000,
+      "brand": "Samsung",
+      "rating": 4.5,
+      "image": "images/samsung-s23.jpg",
+      "description": "Latest Samsung Galaxy S23 with advanced camera features",
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Nike Air Max",
+      "category": "Fashion",
+      "subcategory": "Shoes",
+      "price": 8500,
+      "brand": "Nike",
+      "rating": 4.3,
+      "image": "images/nike-airmax.jpg",
+      "description": "Comfortable sports shoes for daily wear",
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "MacBook Pro M3",
+      "category": "Electronics",
+      "subcategory": "Laptops",
+      "price": 185000,
+      "brand": "Apple",
+      "rating": 4.8,
+      "image": "images/macbook-pro.jpg",
+      "description": "High-performance laptop for professionals",
+      "inStock": false
+    },
+    {
+      "id": 4,
+      "name": "Levi's Jeans",
+      "category": "Fashion",
+      "subcategory": "Clothing",
+      "price": 3500,
+      "brand": "Levi's",
+      "rating": 4.2,
+      "image": "images/levis-jeans.jpg",
+      "description": "Classic denim jeans with perfect fit",
+      "inStock": true
+    },
+    {
+      "id": 5,
+      "name": "Sony WH-1000XM5",
+      "category": "Electronics",
+      "subcategory": "Headphones",
+      "price": 32000,
+      "brand": "Sony",
+      "rating": 4.7,
+      "image": "images/sony-headphones.jpg",
+      "description": "Noise-cancelling wireless headphones",
+      "inStock": true
+    },
+    {
+      "id": 6,
+      "name": "Adidas T-Shirt",
+      "category": "Fashion",
+      "subcategory": "Clothing",
+      "price": 1200,
+      "brand": "Adidas",
+      "rating": 4.0,
+      "image": "images/adidas-tshirt.jpg",
+      "description": "Cotton sports t-shirt for gym and casual wear",
+      "inStock": true
+    },
+    {
+      "id": 7,
+      "name": "iPad Pro 12.9\"",
+      "category": "Electronics",
+      "subcategory": "Tablets",
+      "price": 95000,
+      "brand": "Apple",
+      "rating": 4.6,
+      "image": "images/ipad-pro.jpg",
+      "description": "Professional tablet for creative work",
+      "inStock": true
+    },
+    {
+      "id": 8,
+      "name": "Puma Tracksuit",
+      "category": "Fashion",
+      "subcategory": "Clothing",
+      "price": 4500,
+      "brand": "Puma",
+      "rating": 4.1,
+      "image": "images/puma-tracksuit.jpg",
+      "description": "Comfortable tracksuit for sports activities",
+      "inStock": false
+    }
+  ],
+  "categories": [
+    "All",
+    "Electronics",
+    "Fashion"
+  ],
+  "subcategories": {
+    "Electronics": [
+      "Mobile Phones",
+      "Laptops",
+      "Headphones",
+      "Tablets"
+    ],
+    "Fashion": [
+      "Shoes",
+      "Clothing"
+    ]
+  },
+  "brands": [
+    "Samsung",
+    "Apple",
+    "Nike",
+    "Levi's",
+    "Sony",
+    "Adidas",
+    "Puma"
+  ],
+  "priceRanges": [
+    {
+      "label": "Under ₹5,000",
+      "min": 0,
+      "max": 5000
+    },
+    {
+      "label": "₹5,000 - ₹15,000",
+      "min": 5000,
+      "max": 15000
+    },
+    {
+      "label": "₹15,000 - ₹50,000",
+      "min": 15000,
+      "max": 50000
+    },
+    {
+      "label": "Above ₹50,000",
+      "min": 50000,
+      "max": 999999
+    }
+  ]
+}
